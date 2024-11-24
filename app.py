@@ -32,6 +32,15 @@ import requests
 
 from resume_builder.resume_generator import ResumeGenerator
 
+from flask import request, render_template, redirect, url_for
+from werkzeug.utils import secure_filename
+import os
+from Utils.resume_scrapper import scrape_resume
+from Utils.gpt_api import get_gpt_suggestions
+
+UPLOAD_FOLDER = 'uploaded_resumes'
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
 app = Flask(__name__)
 # api = Api(app)
 bcrypt = Bcrypt(app)
@@ -460,6 +469,37 @@ def make_resume():
 
     # Render the resume form for GET requests
     return render_template('resume_form.html')
+
+
+@app.route('/student/maybe_do_this', methods=['GET', 'POST'])
+def maybe_do_this():
+    if request.method == 'POST':
+        try:
+            # Get form data
+            job_name = request.form['job_name']
+            job_description = request.form['job_description']
+
+            # Save uploaded resume
+            resume_file = request.files['resume']
+            resume_path = os.path.join(UPLOAD_FOLDER, secure_filename(resume_file.filename))
+            resume_file.save(resume_path)
+
+            # Scrape resume content
+            resume_content = scrape_resume(resume_path)
+
+            # Send data to GPT API
+            suggestions = get_gpt_suggestions(job_name, job_description, resume_content)
+
+            # Render suggestions
+            return render_template('suggestions.html', suggestions=suggestions)
+
+        except Exception as e:
+            print(f"Error: {e}")
+            return "An error occurred while processing your request.", 500
+
+    # Render the form for GET request
+    return render_template('maybe_do_this.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)

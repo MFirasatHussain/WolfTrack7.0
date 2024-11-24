@@ -114,9 +114,8 @@
 
     <div >
       <h2 >Job Application Portal
-        <a href="{{ url_for('make_resume') }}" class="btn btn-primary float-right" style="margin-left: 10px;">
-          Make Resume
-        </a>      
+        <a href="{{ url_for('make_resume') }}" class="btn btn-primary float-right" style="margin-left: 10px;"> Make Resume</a>
+        <a href="{{ url_for('maybe_do_this') }}" class="btn btn-info float-right"> Hmm maybe do this?</a>            
         <button type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#mymodal">Add New Job Application</button>
         <form action="{{ url_for('get_job_application_status', status='Applied') }}" method="GET">
           <div class="form-group float-left">
