@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Generator</title>
+    
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQv3H+JhtphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            background-color: #ffe6e6;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #1c4552;
+        }
+        .btn-primary {
+            background-color: #1c4552;
+            border-color: #1c4552;
+        }
+        .btn-primary:hover {
+            background-color: #16353f;
+            border-color: #16353f;
+        }
+        .btn-secondary {
+            background-color: #da2d2d;
+            border-color: #da2d2d;
+        }
+        .btn-secondary:hover {
+            background-color: #a62222;
+            border-color: #a62222;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center">Resume Generator</h2>
+        <p class="text-center">Fill out the details below to generate your resume.</p>
+        <form method="post" action="/student/make_resume" class="mt-3">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter your phone number" required>
+            </div>
+
+            <div class="form-group">
+                <label for="education">Education:</label>
+                <textarea class="form-control" id="education" name="education" placeholder="List your education" rows="3" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="work_experience">Work Experience:</label>
+                <textarea class="form-control" id="work_experience" name="work_experience" placeholder="Describe your work experience" rows="3"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="skills">Skills:</label>
+                <textarea class="form-control" id="skills" name="skills" placeholder="List your skills" rows="2"></textarea>
+            </div>
+
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary">Generate Resume</button>
+                <a href="/student" class="btn btn-secondary">Back to Home</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

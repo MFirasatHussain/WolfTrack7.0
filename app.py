@@ -30,6 +30,17 @@ from dbutils import add_job, create_tables, add_client, delete_job_application_b
 from login_utils import login_user
 import requests
 
+from resume_builder.resume_generator import ResumeGenerator
+
+from flask import request, render_template, redirect, url_for
+from werkzeug.utils import secure_filename
+import os
+from Utils.resume_scrapper import scrape_resume
+from Utils.gpt_api import get_gpt_suggestions
+
+UPLOAD_FOLDER = 'uploaded_resumes'
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
 app = Flask(__name__)
 # api = Api(app)
 bcrypt = Bcrypt(app)
@@ -403,7 +414,7 @@ def networking_contacts():
 @app.route('/student/job_search/result', methods=['POST'])
 def search():
     job_role = request.form['job_role']
-    adzuna_url = f"https://api.adzuna.com/v1/api/jobs/us/search/1?app_id=575e7a4b&app_key=35423835cbd9428eb799622c6081ffed&what_phrase={job_role}"
+    adzuna_url = f"https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=a3ccdd4c&app_key=9528003d5f2bda2be5e19dd645326cda&what_phrase={job_role}"
     try:
         response = requests.get(adzuna_url)
         if response.status_code == 200:
@@ -434,6 +445,61 @@ def download_pdf(resource_id):
     if resource and "pdf" in resource:
         return send_file(resource["pdf"], as_attachment=True)
     return "File not found", 404
+
+
+@app.route('/student/make_resume', methods=['GET', 'POST'])
+def make_resume():
+    if request.method == 'POST':
+        # Collect form data
+        user_data = {
+            'name': request.form.get('name'),
+            'email': request.form.get('email'),
+            'phone': request.form.get('phone'),
+            'education': request.form.get('education'),
+            'work_experience': request.form.get('work_experience'),
+            'skills': request.form.get('skills'),
+        }
+
+        # Generate the resume PDF
+        generator = ResumeGenerator(user_data)
+        resume_path = generator.generate_pdf()
+
+        # Return the generated resume as a downloadable file
+        return send_file(resume_path, as_attachment=True)
+
+    # Render the resume form for GET requests
+    return render_template('resume_form.html')
+
+
+@app.route('/student/maybe_do_this', methods=['GET', 'POST'])
+def maybe_do_this():
+    if request.method == 'POST':
+        try:
+            # Get form data
+            job_name = request.form['job_name']
+            job_description = request.form['job_description']
+
+            # Save uploaded resume
+            resume_file = request.files['resume']
+            resume_path = os.path.join(UPLOAD_FOLDER, secure_filename(resume_file.filename))
+            resume_file.save(resume_path)
+
+            # Scrape resume content
+            resume_content = scrape_resume(resume_path)
+
+            # Send data to GPT API
+            suggestions = get_gpt_suggestions(job_name, job_description, resume_content)
+
+            # Render suggestions
+            return render_template('suggestions.html', suggestions=suggestions)
+
+        except Exception as e:
+            print(f"Error: {e}")
+            return "An error occurred while processing your request.", 500
+
+    # Render the form for GET request
+    return render_template('maybe_do_this.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
