@@ -877,6 +877,36 @@ stroke-dashoffset: 900
 </div>
 </form>
 </div>
+<div class="form-row">
+  <button 
+      id="atsScoreButton" 
+      class="btn btn-primary" 
+      onclick="getATSScore()" 
+      style="margin-top: 15px;"
+      align-items="center">
+      Get ATS Score
+  </button>
+</div>
+
+<!-- Modal for displaying ATS results -->
+<div class="modal fade" id="atsResultModal" tabindex="-1" role="dialog" aria-labelledby="atsResultModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="atsResultModalLabel">ATS Score</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <p><strong>Score:</strong> <span id="atsScore"></span></p>
+              <p><strong>Remarks:</strong></p>
+              <ul id="atsRemarks"></ul>
+          </div>
+      </div>
+  </div>
+</div>
+
         <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
         </body>
     </html>

@@ -36,7 +36,7 @@ from flask import request, render_template, redirect, url_for
 from werkzeug.utils import secure_filename
 import os
 from Utils.resume_scrapper import scrape_resume
-from Utils.gpt_api import get_gpt_suggestions
+# from Utils.gpt_api import get_gpt_suggestions
 
 UPLOAD_FOLDER = 'uploaded_resumes'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -365,39 +365,39 @@ def display():
 
 
 
-@app.route('/student/chat_gpt_analyzer/', methods=['GET'])
-def chat_gpt_analyzer():
-    files = os.listdir(os.getcwd()+'/Controller/resume')
-    pdf_path = os.getcwd()+'//Controller/resume/'+files[0]
-    text_path = os.getcwd()+'//Controller/resume_txt/'+files[0][:-3]+'txt'
-    with open(text_path, 'w'):
-        pass
-    pdf_to_text(pdf_path, text_path)
-    suggestions = chatgpt(text_path)
-    flag = 0
-    final_sugges_send = []
-    final_sugges = ""
+# @app.route('/student/chat_gpt_analyzer/', methods=['GET'])
+# def chat_gpt_analyzer():
+#     files = os.listdir(os.getcwd()+'/Controller/resume')
+#     pdf_path = os.getcwd()+'//Controller/resume/'+files[0]
+#     text_path = os.getcwd()+'//Controller/resume_txt/'+files[0][:-3]+'txt'
+#     with open(text_path, 'w'):
+#         pass
+#     pdf_to_text(pdf_path, text_path)
+#     suggestions = chatgpt(text_path)
+#     flag = 0
+#     final_sugges_send = []
+#     final_sugges = ""
 
-    # Initialize an empty string to store the result
-    result_string = ""
+#     # Initialize an empty string to store the result
+#     result_string = ""
 
-    # Iterate through each character in the original string
-    for char in suggestions:
-        # If the character is not a newline character, add it to the result string
-        if char != '\n':
-            final_sugges += char
-    sections = final_sugges.split("Section")
-    for section in sections:
-        section = section.strip()  # Remove leading and trailing whitespace
-        # if section:  # Check if the section is not empty (e.g., due to leading/trailing "Section")
-        #     print("Section:", section)
-    sections = sections[1:]
-    section_names = ['Education', 'Experience','Skills', 'Projects']
-    sections[0] = sections[0][3:]
-    sections[1] = sections[1][3:]
-    sections[2] = sections[2][3:]
-    sections[3] = sections[3][3:]
-    return render_template('chat_gpt_analyzer.html', suggestions=sections, pdf_path=pdf_path, section_names = section_names)
+#     # Iterate through each character in the original string
+#     for char in suggestions:
+#         # If the character is not a newline character, add it to the result string
+#         if char != '\n':
+#             final_sugges += char
+#     sections = final_sugges.split("Section")
+#     for section in sections:
+#         section = section.strip()  # Remove leading and trailing whitespace
+#         # if section:  # Check if the section is not empty (e.g., due to leading/trailing "Section")
+#         #     print("Section:", section)
+#     sections = sections[1:]
+#     section_names = ['Education', 'Experience','Skills', 'Projects']
+#     sections[0] = sections[0][3:]
+#     sections[1] = sections[1][3:]
+#     sections[2] = sections[2][3:]
+#     sections[3] = sections[3][3:]
+#     return render_template('chat_gpt_analyzer.html', suggestions=sections, pdf_path=pdf_path, section_names = section_names)
 
 @app.route('/student/job_search')
 def job_search():
