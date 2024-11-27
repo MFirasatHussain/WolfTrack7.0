@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hmm maybe do this?</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Hmm maybe do this?</h2>
+        <form method="post" action="/student/maybe_do_this" enctype="multipart/form-data" class="mt-4">
+            <div class="form-group">
+                <label for="job_name">Job Name:</label>
+                <input type="text" class="form-control" id="job_name" name="job_name" placeholder="Enter the job name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="job_description">Job Description:</label>
+                <textarea class="form-control" id="job_description" name="job_description" placeholder="Enter the job description" rows="5" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="resume">Upload Resume:</label>
+                <input type="file" class="form-control-file" id="resume" name="resume" accept=".pdf, .docx" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Get Suggestions</button>
+            <a href="/student" class="btn btn-secondary">Back to Home</a>
+        </form>
+    </div>
+</body>
+</html>

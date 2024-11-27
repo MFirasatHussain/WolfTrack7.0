@@ -35,6 +35,15 @@ import requests
 from resume_builder.resume_generator import ResumeGenerator
 from resume_analyzer.analyzer_handler import analyze_resume
 
+from flask import request, render_template, redirect, url_for
+from werkzeug.utils import secure_filename
+import os
+from Utils.resume_scrapper import scrape_resume
+#from Utils.gpt_api import get_gpt_suggestions
+
+UPLOAD_FOLDER = 'uploaded_resumes'
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
 app = Flask(__name__)
 # api = Api(app)
 bcrypt = Bcrypt(app)
@@ -362,39 +371,39 @@ def calculate_ats_score():
         return jsonify({'error': str(e)}), 500
 
 
-@app.route('/student/chat_gpt_analyzer/', methods=['GET'])
-def chat_gpt_analyzer():
-    files = os.listdir(os.getcwd()+'/Controller/resume')
-    pdf_path = os.getcwd()+'//Controller/resume/'+files[0]
-    text_path = os.getcwd()+'//Controller/resume_txt/'+files[0][:-3]+'txt'
-    with open(text_path, 'w'):
-        pass
-    pdf_to_text(pdf_path, text_path)
-    suggestions = chatgpt(text_path)
-    flag = 0
-    final_sugges_send = []
-    final_sugges = ""
+# @app.route('/student/chat_gpt_analyzer/', methods=['GET'])
+# def chat_gpt_analyzer():
+#     files = os.listdir(os.getcwd()+'/Controller/resume')
+#     pdf_path = os.getcwd()+'//Controller/resume/'+files[0]
+#     text_path = os.getcwd()+'//Controller/resume_txt/'+files[0][:-3]+'txt'
+#     with open(text_path, 'w'):
+#         pass
+#     pdf_to_text(pdf_path, text_path)
+#     suggestions = chatgpt(text_path)
+#     flag = 0
+#     final_sugges_send = []
+#     final_sugges = ""
 
-    # Initialize an empty string to store the result
-    result_string = ""
+#     # Initialize an empty string to store the result
+#     result_string = ""
 
-    # Iterate through each character in the original string
-    for char in suggestions:
-        # If the character is not a newline character, add it to the result string
-        if char != '\n':
-            final_sugges += char
-    sections = final_sugges.split("Section")
-    for section in sections:
-        section = section.strip()  # Remove leading and trailing whitespace
-        # if section:  # Check if the section is not empty (e.g., due to leading/trailing "Section")
-        #     print("Section:", section)
-    sections = sections[1:]
-    section_names = ['Education', 'Experience','Skills', 'Projects']
-    sections[0] = sections[0][3:]
-    sections[1] = sections[1][3:]
-    sections[2] = sections[2][3:]
-    sections[3] = sections[3][3:]
-    return render_template('chat_gpt_analyzer.html', suggestions=sections, pdf_path=pdf_path, section_names = section_names)
+#     # Iterate through each character in the original string
+#     for char in suggestions:
+#         # If the character is not a newline character, add it to the result string
+#         if char != '\n':
+#             final_sugges += char
+#     sections = final_sugges.split("Section")
+#     for section in sections:
+#         section = section.strip()  # Remove leading and trailing whitespace
+#         # if section:  # Check if the section is not empty (e.g., due to leading/trailing "Section")
+#         #     print("Section:", section)
+#     sections = sections[1:]
+#     section_names = ['Education', 'Experience','Skills', 'Projects']
+#     sections[0] = sections[0][3:]
+#     sections[1] = sections[1][3:]
+#     sections[2] = sections[2][3:]
+#     sections[3] = sections[3][3:]
+#     return render_template('chat_gpt_analyzer.html', suggestions=sections, pdf_path=pdf_path, section_names = section_names)
 
 @app.route('/student/job_search')
 def job_search():
@@ -411,7 +420,11 @@ def networking_contacts():
 @app.route('/student/job_search/result', methods=['POST'])
 def search():
     job_role = request.form['job_role']
-    adzuna_url = f"https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=a3ccdd4c&app_key=9528003d5f2bda2be5e19dd645326cda&what_phrase={job_role}"
+    min_salary = request.form['minSalary']
+    location = request.form['location']
+    max_salary = request.form['maxSalary']
+
+    adzuna_url = f"https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=a3ccdd4c&app_key=9528003d5f2bda2be5e19dd645326cda&what_phrase={job_role}&where={location}&salary_min={min_salary}&salary_max={max_salary}"
     try:
         response = requests.get(adzuna_url)
         if response.status_code == 200:
@@ -466,6 +479,36 @@ def make_resume():
 
     # Render the resume form for GET requests
     return render_template('resume_form.html')
+
+
+# @app.route('/student/maybe_do_this', methods=['GET', 'POST'])
+# def maybe_do_this():
+#     if request.method == 'POST':
+#         try:
+#             # Get form data
+#             job_name = request.form['job_name']
+#             job_description = request.form['job_description']
+
+#             # Save uploaded resume
+#             resume_file = request.files['resume']
+#             resume_path = os.path.join(UPLOAD_FOLDER, secure_filename(resume_file.filename))
+#             resume_file.save(resume_path)
+
+#             # Scrape resume content
+#             resume_content = scrape_resume(resume_path)
+
+#             # Send data to GPT API
+#             suggestions = get_gpt_suggestions(job_name, job_description, resume_content)
+
+#             # Render suggestions
+#             return render_template('suggestions.html', suggestions=suggestions)
+
+#         except Exception as e:
+#             print(f"Error: {e}")
+#             return "An error occurred while processing your request.", 500
+
+    # Render the form for GET request
+    #return render_template('maybe_do_this.html')
 
 
 if __name__ == '__main__':
