@@ -5,15 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Analysis Result</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
     <div class="container mt-4">
         <h2 class="text-center">Resume Analysis Result</h2>
         <div class="alert alert-success mt-4">
-            <pre>{{ result }}</pre>
+            <pre id="analysis-text">{{ result }}</pre>
         </div>
-        <a href="/analyze_resume" class="btn btn-primary">Analyze Another Resume</a>
-        <a href="/student" class="btn btn-secondary">Back to Home</a>
+        <div class="text-center mt-3">
+            <button class="btn btn-info" onclick="getATSScore()">
+                <i class="fas fa-calculator"></i> Calculate ATS Score
+            </button>
+            <a href="/analyze_resume" class="btn btn-primary">Analyze Another Resume</a>
+            <a href="/student" class="btn btn-secondary">Back to Home</a>
+        </div>
     </div>
+
+    <!-- ATS Score Modal -->
+    <div class="modal fade" id="atsScoreModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title">ATS Compatibility Score</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="display-4 mb-3">
+                        <span id="ats-score">0</span>/100
+                    </div>
+                    <p class="text-muted">This score indicates how well your resume might perform in Applicant Tracking Systems</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    function getATSScore() {
+        const resumeContent = document.getElementById('analysis-text').textContent;
+        
+        fetch('/get_ats_score', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                resume_content: resumeContent
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert('Error calculating ATS score: ' + data.error);
+                return;
+            }
+            document.getElementById('ats-score').textContent = data.ats_score;
+            $('#atsScoreModal').modal('show');
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error calculating ATS score');
+        });
+    }
+    </script>
 </body>
 </html>

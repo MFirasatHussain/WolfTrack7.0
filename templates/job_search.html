@@ -77,8 +77,17 @@
 <body>
     <h1>Job Search</h1>
     <form action="/student/job_search/result" method="post">
-        <label for="job_role">Enter Job Role:</label><br>
+        <label for="job_role">Job Role:</label><br>
         <input type="text" id="job_role" name="job_role" required><br>
+        <label for="minSalary">Minimum Salary:</label>
+        <input type="number" id="minSalary" name="minSalary" placeholder="Enter minimum salary"><br><br>
+
+        <label for="maxSalary">Maximum Salary:</label>
+        <input type="number" id="maxSalary" name="maxSalary" placeholder="Enter maximum salary"><br><br>
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" placeholder="Enter location"><br><br>
+        
         <input type="submit" value="Search">
     </form>
 </body>
