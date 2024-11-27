@@ -1,4 +1,4 @@
-<h1><b>WolfTrack 6.0</b></h1>
+<h1><b>WolfTrack 7.0</b></h1>
 
 ---
 
@@ -19,7 +19,7 @@
 <details open="open">
   <summary>Table of Contents</summary>
   <ol>
-    <li><a href="#why-wolftrack-6">Why WolfTrack 6.0?</a></li>
+    <li><a href="#why-wolftrack-6">Why WolfTrack 7.0?</a></li>
     <li><a href="#check-out-the-video">Check out the video!</a></li>
     <li><a href="#what-is-new-in-this-version">What is new in this version?</a></li>
     <li><a href="#why-contribute">Why Contribute?</a></li>
@@ -40,7 +40,7 @@
 
 ## Why WolfTrack 6?
 
-WolfTrack6.0 is your ultimate destination for seamless organization and efficiency in your pursuit of internships and full-time job opportunities. This sophisticated online platform empowers you to streamline your application process, keeping tabs on every step of your professional journey. Say goodbye to scattered notes and endless email threads – with WolfTrack6.0, you can effortlessly manage applications, deadlines, and crucial documents, ensuring you never miss a beat in your career quest. It's your compass in the competitive job market, offering structure and precision without sacrificing style and user-friendliness. WolfTrack6.0 is your passport to success, guiding you through the winding paths of career opportunities with elegance and ease.
+WolfTrack7.0 is your ultimate destination for seamless organization and efficiency in your pursuit of internships and full-time job opportunities. This sophisticated online platform empowers you to streamline your application process, keeping tabs on every step of your professional journey. Say goodbye to scattered notes and endless email threads – with WolfTrack6.0, you can effortlessly manage applications, deadlines, and crucial documents, ensuring you never miss a beat in your career quest. It's your compass in the competitive job market, offering structure and precision without sacrificing style and user-friendliness. WolfTrack6.0 is your passport to success, guiding you through the winding paths of career opportunities with elegance and ease.
 
 We offer features like giving suggestions for improvements on your resume, tracking your application, interview prep resoruces and many more.
 
@@ -48,7 +48,7 @@ We offer features like giving suggestions for improvements on your resume, track
 
 ## Check out the video!
 
-To demonstrate our application's functionality and showcase its working examples, we have produced a YouTube video for the WolfTrack 6.0 project. In this video, we showcase that the system operates as intended. You can view the video by clicking on the following link:  [YouTube Link](https://youtu.be/KzTqL9esUlY) 
+To demonstrate our application's functionality and showcase its working examples, we have produced a YouTube video for the WolfTrack 7.0 project. In this video, we showcase that the system operates as intended. You can view the video by clicking on the following link:  [YouTube Link](https://youtu.be/KzTqL9esUlY) 
 
 ---
 
@@ -253,12 +253,13 @@ It is part of the [Github Workflow Build](https://github.com/nih326/WolfTrack6.0
 - [x] Interview Preparation resources tab
 - [x] Imporve Login and Signup Interface
 
-### Phase 6 WolfTrack 7.0 (Future Scope):
-- [ ] Web scraper for recommended jobs
-- [ ] Configure Cron-Job for reminder as SMS notification
-- [ ] Resume template editor
-- [ ] Salary insights and comparisons
+### Phase 6 WolfTrack 7.0 (OUR NEW IMPLEMENTATION):
+- [ ] Resume Builder
+- [ ] Resume AI Based Analyzer
+- [ ] Resume ATS Score
 - [ ] Filtering Job Applications according to User Requirements
+
+### Phase 7 WolfTrack 8.0 (FUTURE IMPLEMENTATION):
 - [ ] Advanced filters for managing multiple applications under specific companies
 - [ ] Admin Analytics tab to track User Activities
 - [ ] Online Chat with expert
@@ -266,7 +267,7 @@ It is part of the [Github Workflow Build](https://github.com/nih326/WolfTrack6.0
 
 ## Developer Support and Updates
 
-For support and inquiries related to **WolfTrack 6.0**, please contact us at **csc510group39@gmail.com**. We are here to assist you and address any questions or issues you may have.
+For support and inquiries related to **WolfTrack 7.0**, please contact us at **fmohamm8@ncsu.edu**. We are here to assist you and address any questions or issues you may have.
 
 We appreciate your interest and look forward to providing you with the best possible support and updates.
 
@@ -281,7 +282,7 @@ This project currently receives no funding.
 
 ## Contributions
 
-Please refer to the [CONTRIBUTING.md](https://github.com/nih326/WolfTrack6.0/blob/feature/CONTRIBUTING.md) if you want to contrbute to the WolfTrack 6.0 source code. Follow all the guidelines mentioned and raise a pull request for the developers to review before the code goes to the main source code.
+Please refer to the [CONTRIBUTING.md](https://github.com/nih326/WolfTrack7.0/blob/feature/CONTRIBUTING.md) if you want to contrbute to the WolfTrack 6.0 source code. Follow all the guidelines mentioned and raise a pull request for the developers to review before the code goes to the main source code.
 
 ---
 
