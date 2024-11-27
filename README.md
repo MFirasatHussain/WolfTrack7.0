@@ -282,13 +282,17 @@ This project currently receives no funding.
 
 ## Contributions
 
-Please refer to the [CONTRIBUTING.md](https://github.com/nih326/WolfTrack7.0/blob/feature/CONTRIBUTING.md) if you want to contrbute to the WolfTrack 6.0 source code. Follow all the guidelines mentioned and raise a pull request for the developers to review before the code goes to the main source code.
+Please refer to the [CONTRIBUTING.md](https://github.com/MFirasatHussain/WolfTrack7.0/blob/feature/CONTRIBUTING.md) if you want to contrbute to the WolfTrack 6.0 source code. Follow all the guidelines mentioned and raise a pull request for the developers to review before the code goes to the main source code.
 
 ---
 
 ## Contributors
 
-<table>
+Pankaj Manoharlal Thakur
+Firasat Hussain Mohammed
+Utkarsh Sharma
+
+<!-- <table>
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
@@ -309,7 +313,7 @@ Please refer to the [CONTRIBUTING.md](https://github.com/nih326/WolfTrack7.0/blo
     <td align="center"><a href="https://github.com/diya0603"><img src="https://avatars.githubusercontent.com/u/178948228?v=4" width="75px;" alt=""/><br /><sub><b>Diya Shetty</b></sub></a><br /></td>
     <td align="center"><a href="https://github.com/sanjana1399"><img src="https://avatars.githubusercontent.com/u/57448690?v=4" width="75px;" alt=""/><br /><sub><b>Sanjana Nanjangud Shreenivas</b></sub></a><br /></td>
   </tr>
-</table>
+</table> -->
 
 ---
 ## Acknowledgements
